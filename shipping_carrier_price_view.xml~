@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    	<record id="view_shipping_price_form" model="ir.ui.view">
+        	<field name="name">shipping.price.form</field>
+            <field name="model">shipping.price</field>
+            <field name="arch" type="xml">
+            	<form string="Shipping Price" version="7.0">
+            		<sheet>
+            			<group cols="4">
+            				<group>
+            					<field name="courier_company"/>
+            					<field name="rate_per_500"/>
+            					<field name="cod_charges"/>
+            					<field name="rate_per_add_500"/>
+            					<field name="fuel_charges"/>
+        					</group>
+        					<group>
+        						<field name="to_pincode"/>
+            					<field name="from_pincode"/>
+        					</group>
+            			</group>
+        			</sheet>
+    			</form>
+			</field>
+		</record>
+
+
+		<record id="view_shipping_price__tree" model="ir.ui.view">
+			<field name="name">shipping.price.tree</field>
+			<field name="model">shipping.price</field>
+			<field name="arch" type="xml">
+				<tree string="Shipping Price">
+					<field name="courier_company"/>
+					<field name="to_pincode"/>
+					<field name="from_pincode"/>
+					<field name="rate_per_500"/>
+					<field name="cod_charges"/>
+					<field name="rate_per_add_500"/>
+					<field name="fuel_charges"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_shipping_price_form" model="ir.actions.act_window">
+			<field name="name">Shipping Price</field>
+			<field name="res_model">shipping.price</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem action="action_shipping_price_form"
+		        id="menu_shipping_price_branch"
+		        parent="stock.menu_traceability"
+		        sequence="14"/>
+    	
+    	<record id="view_stock_picking_form" model="ir.ui.view">
+			<field name="name">stock.picking.extened</field>
+			<field name="model">stock.picking</field>
+			<field name="inherit_id" ref="stock.view_picking_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//notebook/page[@string='Additional Info']//field[@name='date_done']" position="after">
+			    	<field name="courier_company"/>
+			    	<field name="ship_rate"/>
+			    </xpath>
+			</field>
+		</record>
+    
+    
+    </data>
+</openerp>
