@@ -90,13 +90,14 @@ class sale_order(osv.Model):
 						company_ship_costing_list.append(ship_costing)
 						ship_cost_dict[shipping_price_obj.id] = ship_costing
 			print "\n\n=========company_ship_costing_list=",company_ship_costing_list
-			print "\n\n=========ship_cost_dict=",ship_cost_dict
-			best_shipping_rate = min(company_ship_costing_list)
-			for key,value in ship_cost_dict.items():
-				if best_shipping_rate == value:
-					print "\n\n\n\n\n\n====",key,value
-					stock_picking_obj.write(cr,uid,result['res_id'],{'courier_company': shipping_price_obj.courier_company,'ship_rate':value})
-					print "\n\n\n ======done======="
+			if company_ship_costing_list:
+				print "\n\n=========ship_cost_dict=",ship_cost_dict
+				best_shipping_rate = min(company_ship_costing_list)
+				for key,value in ship_cost_dict.items():
+					if best_shipping_rate == value:
+						print "\n\n\n\n\n\n====",key,value
+						stock_picking_obj.write(cr,uid,result['res_id'],{'courier_company': shipping_price_obj.courier_company,'ship_rate':value})
+						print "\n\n\n ======done======="
 		return result
 
 
@@ -147,10 +148,11 @@ class stock_picking(osv.Model):
     					#vals.update({'courier_company': courier_company})
     		print "\n\n=========company_ship_costing_list=",company_ship_costing_list
     		print "\n\n=========ship_cost_dict=",ship_cost_dict
-    		best_shipping_rate = min(company_ship_costing_list)
-    		for key,value in ship_cost_dict.items():
-    			if best_shipping_rate == value:
-    				print "\n\n\n\n\n\n====",key,value
-    				shipping_price_obj = shipping_price_pool.browse(cr,uid,key)
-    				vals.update({'courier_company': shipping_price_obj.courier_company,'ship_rate':value})
+    		if company_ship_costing_list:
+				best_shipping_rate = min(company_ship_costing_list)
+				for key,value in ship_cost_dict.items():
+					if best_shipping_rate == value:
+						print "\n\n\n\n\n\n====",key,value
+						shipping_price_obj = shipping_price_pool.browse(cr,uid,key)
+						vals.update({'courier_company': shipping_price_obj.courier_company,'ship_rate':value})
     	return super(stock_picking, self).create(cr, uid, vals, context=context)
