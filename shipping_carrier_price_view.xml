@@ -48,6 +48,7 @@
 			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 		</record>
+		
 		<menuitem action="action_shipping_price_form"
 		        id="menu_shipping_price_branch"
 		        parent="stock.menu_traceability"
