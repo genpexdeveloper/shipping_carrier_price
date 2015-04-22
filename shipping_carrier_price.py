@@ -85,7 +85,7 @@ class sale_order(osv.Model):
 						ship_costing += (shipping_price_obj.rate_per_add_500 * extart_weight)
 						fuel_charge = (ship_costing*50/100)
 						ship_costing = ship_costing + fuel_charge
-						if so_obj.payment_term.name == 'COD':
+						if 'Cash On Delivery' in so_obj.note:
 							ship_costing = ship_costing + shipping_price_obj.cod_charges
 						company_ship_costing_list.append(ship_costing)
 						ship_cost_dict[shipping_price_obj.id] = ship_costing
