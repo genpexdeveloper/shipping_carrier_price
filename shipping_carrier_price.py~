@@ -22,6 +22,14 @@
 ##############################################################################
 from openerp.osv import fields, orm,osv
 import math
+
+class stock_picking(osv.Model):
+    _inherit = 'stock.picking'
+    _columns = {
+        'courier_company': fields.char('Courier Company'),
+        'courier_company': fields.float('Courier Company'),
+    }
+
 class shipping_price(osv.Model):
 	_name = "shipping.price"
 	_description = "Shipping Price"
