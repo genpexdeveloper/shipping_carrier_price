@@ -27,7 +27,7 @@ class stock_picking(osv.Model):
     _inherit = 'stock.picking'
     _columns = {
         'courier_company': fields.char('Courier Company'),
-        'courier_company': fields.float('Courier Company'),
+        'ship_rate': fields.float('Ship Rate'),
     }
 
 class shipping_price(osv.Model):
@@ -65,7 +65,7 @@ class sale_order(osv.Model):
 			res = mod_obj.get_object_reference(cr, uid, 'stock', 'view_picking_form')
 			result['views'] = [(res and res[1] or False, 'form')]
 			result['res_id'] = pick_ids and pick_ids[0] or False
-		print "\n\n\n==========result======",result['res_id'],ids
+		#print "\n\n\n==========result======",result['res_id'],ids
 		if result['res_id']:
 			if ids:
 				total_net_weight = 0.0
